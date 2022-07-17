@@ -23,3 +23,5 @@ class Solution:
                     nums[cnt2], nums[i] = 2, nums[cnt2]
                     cnt2 -= 1
             
+# time: O(N)
+# space: O(1)
