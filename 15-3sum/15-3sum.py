@@ -6,6 +6,8 @@ class Solution:
         for i in range(len(nums)-2):
             if nums[-1] + nums[-2] + nums[i] < 0:
                 continue
+            if nums[i] + nums[i+1] + nums[i+2] > 0:
+                break
             low, high = i+1, len(nums)-1
             while low < high:
                 cur_2sum = nums[low] + nums[high]
