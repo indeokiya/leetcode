@@ -22,6 +22,8 @@ class Solution:
                         ans.append(tmp)
                     low += 1
                     high -= 1
+                    while low < high and nums[low] == nums[low-1]:
+                        low += 1
             
         return ans
                     
