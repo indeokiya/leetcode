@@ -2,15 +2,12 @@ class Solution {
     public String freqAlphabets(String s) {
         StringBuilder sb = new StringBuilder();
         int p = 0;
-        int tmp;
         while (p < s.length()) {
             if (p < s.length()-2 && s.charAt(p+2) == '#') {
-                tmp = Integer.parseInt(s.substring(p, p+2));
-                sb.append((char)(96+tmp));
+                sb.append((char)(96+Integer.parseInt(s.substring(p, p+2))));
                 p += 3;
             } else {
-                tmp = (int)s.charAt(p++) - (int)'0';
-                sb.append((char)(96+tmp));
+                sb.append((char)(96+(int)s.charAt(p++) - (int)'0'));
             }
             System.out.println(p);
     
