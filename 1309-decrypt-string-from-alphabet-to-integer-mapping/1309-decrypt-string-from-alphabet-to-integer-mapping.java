@@ -9,8 +9,6 @@ class Solution {
             } else {
                 sb.append((char)(96+(int)s.charAt(p++) - (int)'0'));
             }
-            System.out.println(p);
-    
         }
         return sb.toString();
     }
