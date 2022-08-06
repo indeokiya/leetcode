@@ -16,7 +16,6 @@ class Solution {
             ans = ans << 1;
             ans += p.val;
             p = p.next;
-            System.out.println(ans);
         }
         return ans;
     }
