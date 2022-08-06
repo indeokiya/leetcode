@@ -29,8 +29,11 @@ class Solution {
             Node current = myStack.pop();
             ans.add(current.val);
 
-            int tmpSize = current.children.size(); 
-            for (int i=tmpSize-1; i>=0; i--) {
+            // int tmpSize = current.children.size(); 
+            // for (int i=tmpSize-1; i>=0; i--) {
+            //     myStack.push(current.children.get(i));
+            // }
+            for (int i=current.children.size()-1; i>=0; i--) {
                 myStack.push(current.children.get(i));
             }
         }
