@@ -44,7 +44,6 @@ class Solution {
                 tmp.next = myQueue.peek();
                 count += 1;
             } else {
-                tmp.next = null;
                 count = 1;
                 pow += 1;
             }
