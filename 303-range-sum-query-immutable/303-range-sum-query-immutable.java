@@ -1,20 +1,17 @@
 class NumArray {
-    List<Integer> arr = new LinkedList<>();
+    int[] arr;
     public NumArray(int[] nums) {
         int len = nums.length;
+        arr = new int[len+1];
+        arr[0] = 0;
         
         for (int i=0; i<len; i++) {
-            int tmp_sum = nums[i];
-            for (int j=i+1; j<len; j++) {
-                tmp_sum += nums[j];
-            }
-            arr.add(tmp_sum);
+            arr[i+1] = arr[i] + nums[i];
         }
-        arr.add(0);
     }
     
     public int sumRange(int left, int right) {
-        return arr.get(left) - arr.get(right+1);
+        return arr[right+1] - arr[left]; 
     }
 }
 
