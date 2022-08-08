@@ -1,17 +1,18 @@
 class Solution {
     public int sumOddLengthSubarrays(int[] arr) {
         int len = arr.length;
-        // if (arr.length % 2 == 0) {
-        //     return sumOddLengthSubarrays(Arrays.copyOfRange(arr, 0, len)) + sumOddLengthSubarrays(Arrays.copyOfRange(arr, 1, len+1));
-        // }
-        
         int ans = 0;
         int tmp;
+        
+        // for (int i=0; i<len; i++) {
+        //     tmp = arr[i];
+        //     for (int j=1; j<len+1; j+=2) {
+        //         ans += tmp*Math.min(Math.min(j, len+1-j), Math.min(i+1, len-i) );
+        //     }
+        // }
+        
         for (int i=0; i<len; i++) {
-            tmp = arr[i];
-            for (int j=1; j<len+1; j+=2) {
-                ans += tmp*Math.min(Math.min(j, len+1-j), Math.min(i+1, len-i) );
-            }
+            ans += arr[i]*((((arr.length-i)*(i+1))+1)/2);
         }
         
         return ans;
