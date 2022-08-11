@@ -10,7 +10,7 @@ class Solution {
                 if (grid[i][j] == 1) {
                     tmp_count[0] = 0;
                     myFunc(grid, i, j, tmp_count);
-                    ans = ans > tmp_count[0] ? ans : tmp_count[0];
+                    ans = Math.max(ans, tmp_count[0]);
                 }
             }
         }
