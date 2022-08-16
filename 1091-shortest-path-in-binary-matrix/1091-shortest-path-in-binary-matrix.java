@@ -1,8 +1,8 @@
 class Solution {
     private Queue<int[]> q;
     private int n;
-    private int[] dr = {0, 1, 1, 1, 0, -1, -1, -1};
-    private int[] dc = {1, 1, 0, -1, -1, -1, 0, 1};
+    private int[] dr = new int[]{0, 1, 1, 1, 0, -1, -1, -1};
+    private int[] dc = new int[]{1, 1, 0, -1, -1, -1, 0, 1};
     
     public void bfs(int[][] grid, int i, int j) {
         int new_row, new_col;
@@ -28,23 +28,20 @@ class Solution {
         int ans = 0;
         int size;
         int x, y;
-        boolean ans_exist = false;
+
         while (!q.isEmpty()) {
             size = q.size();
             for (int i=0; i<size; i++) {
                 x = q.peek()[0];
                 y = q.poll()[1];
                 if (x==n-1 && y==n-1) {
-                    ans_exist = true;
-                    q.clear();
-                    break;
+                    return ans+1;
                 }
                 bfs(grid, x, y);
             }
             ans++;
         }
         
-        if (ans_exist) return ans;
         return -1;
     }
 }
