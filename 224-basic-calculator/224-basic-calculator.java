@@ -56,7 +56,7 @@ class Solution {
                 return prevNum + sum;  // 빠져나감
             }
 
-            System.out.println("prev: " + prevNum + ", curr: " + currNum + ", sum: " + sum + ", preOp: " + preOp);
+            //System.out.println("prev: " + prevNum + ", curr: " + currNum + ", sum: " + sum + ", preOp: " + preOp);
         }
         
         return prevNum + currNum + sum;
