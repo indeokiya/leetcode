@@ -1,11 +1,10 @@
 class NumMatrix {
     private int[][] memo;
-    private int m, n;
 
     // initialize memo
     public NumMatrix(int[][] matrix) {
-        m = matrix.length;
-        n = matrix[0].length;
+        int m = matrix.length;
+        int n = matrix[0].length;
         memo = new int[m+1][n+1];
         // ans = new int[m][n];
         
