@@ -1,6 +1,5 @@
 class NumMatrix {
     private int[][] memo;
-    // private int[][] ans;
     private int m, n;
 
     // initialize memo
