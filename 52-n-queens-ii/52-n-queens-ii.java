@@ -1,32 +1,33 @@
 class Solution {
-    private HashSet<Integer> cols, diags, antiDiags;
+    private boolean[] cols, diags, antiDiags;
     private int count;
-    private int n;
     
-    public void checkRow(int i) {
+    public void checkRow(int i, int n) {
+        if (i == n) {
+            count++;
+            return;
+        }
+        
         for (int j=0; j<n; j++) {
-            if (cols.contains(j) || diags.contains(i-j) || antiDiags.contains(i+j)) {
-                continue;
-            } else {
-                if (i==n-1) {
-                    count++;
-                } else {
-                    cols.add(j); diags.add(i-j); antiDiags.add(i+j);
-                    checkRow(i+1);
-                    cols.remove(j); diags.remove(i-j); antiDiags.remove(i+j);
-                }
-            }
+            int diag = i-j+n;
+            int antiDiag = i+j;
+            
+            if (cols[j] || diags[diag] || antiDiags[antiDiag]) continue;
+            
+            cols[j] = true; diags[diag] = true; antiDiags[antiDiag] = true;
+            checkRow(i+1, n);
+            cols[j] = false; diags[diag] = false; antiDiags[antiDiag] = false;
         }
     }
     
     public int totalNQueens(int n) {
         count = 0;
-        this.n = n;
-        cols = new HashSet<>();
-        diags = new HashSet<>();
-        antiDiags = new HashSet<>();
 
-        checkRow(0);
+        cols = new boolean[n];
+        diags = new boolean[2*n]; // i-j+n == const
+        antiDiags = new boolean[2*n]; // i+j == const
+
+        checkRow(0, n);
 
         return count; 
     }
