@@ -1,53 +1,23 @@
 class Solution {
-    private HashSet<Integer> cols, diags, antiDiags;
-    private int count;
-    private int n;
-    
-    public void checkRow(int i) {
+    public int checkRow(int i, Set<Integer> cols, Set<Integer> diags, Set<Integer> antiDiags, int n) {
+        if (i == n) return 1;
+        
+        int count = 0;
+        
         for (int j=0; j<n; j++) {
             if (cols.contains(j) || diags.contains(i-j) || antiDiags.contains(i+j)) {
                 continue;
-            } else {
-                if (i==n-1) {
-                    count++;
-                } else {
-                    cols.add(j); diags.add(i-j); antiDiags.add(i+j);
-                    checkRow(i+1);
-                    cols.remove(j); diags.remove(i-j); antiDiags.remove(i+j);
-                }
-            }
+            } 
+        
+            cols.add(j); diags.add(i-j); antiDiags.add(i+j);
+            count += checkRow(i+1, cols, diags, antiDiags, n);
+            cols.remove(j); diags.remove(i-j); antiDiags.remove(i+j);
         }
+        
+        return count;
     }
     
-//     public void placeQueen(int i, int j) {
-//         for (int k=0; k<n; k++) {
-//             attacks[k][j] += 1;
-//             attacks[i][k] += 1;
-//             if (i-j+k>=0 && i-j+k<n) attacks[i-j+k][k] += 1; 
-//             if (i+j-k>=0 && i+j-k<n) attacks[i+j-k][k] += 1;
-//         }
-//         attacks[i][j] -= 3;
-//     }
-    
-//     public void removeQueen(int i, int j) {
-//         for (int k=0; k<n; k++) {
-//             attacks[k][j] -= 1;
-//             attacks[i][k] -= 1;
-//             if (i-j+k>=0 && i-j+k<n) attacks[i-j+k][k] -= 1; 
-//             if (i+j-k>=0 && i+j-k<n) attacks[i+j-k][k] -= 1;
-//         }
-//         attacks[i][j] += 3;        
-//     }
-    
     public int totalNQueens(int n) {
-        count = 0;
-        this.n = n;
-        cols = new HashSet<>();
-        diags = new HashSet<>();
-        antiDiags = new HashSet<>();
-
-        checkRow(0);
-
-        return count; 
+        return checkRow(0, new HashSet<>(), new HashSet<>(), new HashSet<>(), n);
     }
 }
