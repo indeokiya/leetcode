@@ -5,12 +5,12 @@ public:
         int len = s.length();
         string ans;
         int max = 0;
-       
+        int start=0;
         for (int i=0; i<len; i++) {
             int tmp = findLength(s, i-1, i+1);
             if (tmp>max) {
                 max = tmp;
-                ans = s.substr(i-tmp/2, tmp);
+                start = i-tmp/2;
             }
         }
         
@@ -19,11 +19,11 @@ public:
             int tmp = findLength(s, i-2, i+1);
             if (tmp>max) {
                 max = tmp;
-                ans = s.substr(i-tmp/2, tmp);
+                start = i-tmp/2;
             }
         }
         
-        return ans;
+        return s.substr(start, max);
     }
     
 private:
