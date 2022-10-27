@@ -3,7 +3,7 @@ public:
     bool increasingTriplet(vector<int>& nums) {
         int first = INT_MAX-1, second = INT_MAX;
         
-        for (int num : nums) {
+        for (int &num : nums) {
             if (num > second) {
                 return true;
             } else if (num <= first) {
