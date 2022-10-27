@@ -4,22 +4,15 @@ public:
     string longestPalindrome(string s) {
         int len = s.length();
         string ans;
-        int max = 0;
+        int max = -1;
         int start=0;
         for (int i=0; i<len; i++) {
-            int tmp = findLength(s, i-1, i+1);
+            int tmp1 = findLength(s, i-1, i+1);
+            int tmp2 = findLength(s, i, i+1);
+            int tmp = std::max(tmp1, tmp2);
             if (tmp>max) {
                 max = tmp;
-                start = i-tmp/2;
-            }
-        }
-        
-        for (int i=1; i<len; i++) {
-            if (s[i]!=s[i-1]) continue;
-            int tmp = findLength(s, i-2, i+1);
-            if (tmp>max) {
-                max = tmp;
-                start = i-tmp/2;
+                start = i-(tmp-1)/2;
             }
         }
         
@@ -27,7 +20,7 @@ public:
     }
     
 private:
-    int findLength(string s, int left, int right) {
+    int findLength(string &s, int left, int right) {
         int len = s.length();
         
         while (left>=0 && right<len && s[left]==s[right]) {
