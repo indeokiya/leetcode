@@ -5,39 +5,32 @@ private:
     
     int left(vector<int>& nums, int target) {
         int l=0, r=nums.size();
-        if (nums[l] > target) return -1;
-        if (nums[l] == target) return l;
         
-        while (true) {
+        while (l < r) {
             int mid = (l+r) >> 1;
             if (nums[mid] < target) {
-                l = mid;
+                l = mid+1;
             } else {
                 r = mid;
             }
-            
-            if (l+1 >= r) {
-                if (r == nums.size() || nums[r] != target) return -1;
-                return r;
-            }
         }
+        
+        return l;
     }
     
     int right(vector<int>& nums, int target) {
         int l=0, r=nums.size();
-        while (true) {
+        
+        while (l < r) {
             int mid = (l+r) >> 1;
-            if (nums[mid] > target) {
-                r = mid;
+            if (nums[mid] <= target) {
+                l = mid+1;
             } else {
-                l = mid;
-            }
-            
-            if (l+1 >= r) {
-                if (nums[l] == target) return l;
-                return -1;
+                r = mid;
             }
         }
+        
+        return l;
     }
     
 public:
@@ -45,7 +38,8 @@ public:
         if (nums.size() == 0) return noElem;
         
         int l = left(nums, target);
-        int r = l == -1 ? -1 : right(nums, target);
+        if (l == nums.size() || nums[l] != target) l = -1;
+        int r = l == -1 ? -1 : right(nums, target)-1;
         
         return vector<int>{l, r};
     }
