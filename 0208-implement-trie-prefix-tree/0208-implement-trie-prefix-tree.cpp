@@ -1,46 +1,45 @@
+struct Node{
+    Node* next[26];
+    bool ExistsEnd;
+    
+};
+
 class Trie {
 private:
-    Trie* next[26];
-    bool existsEnd;
+    Node* root;
     
 public:
     Trie() {
-        fill(next, next+26, nullptr);
-        existsEnd = false;
+        root = new Node();
     }
     
     void insert(string word) {
-        if (word == "") {
-            existsEnd = true;
-            return;
+        Node* curr = root;
+        for (int i=0; i<word.length(); i++) {
+            if (curr->next[word[i]-'a'] == NULL) curr->next[word[i]-'a'] = new Node();
+            curr = curr->next[word[i]-'a'];
         }
-        
-        int c = ctoi(word[0]);
-        if (!next[c]) next[c] = new Trie();
-        next[c]->insert(word.length() == 1 ? "" : word.substr(1));
+        curr->ExistsEnd = true;
     }
     
     bool search(string word) {
-        if (word == "") return existsEnd;
-        
-        int c = ctoi(word[0]);
-        if (!next[c]) return false;
-        
-        return next[c]->search(word.length() == 1 ? "" : word.substr(1));
+        Node* curr = root;
+        for (char c : word) {
+            if (curr->next[c-'a'] == NULL) return false;
+            curr = curr->next[c-'a'];
+        }
+        return curr->ExistsEnd;
     }
     
     bool startsWith(string prefix) {
-        if (prefix == "") return true;
-        
-        int c = ctoi(prefix[0]);
-        if (!next[c]) return false;
-        
-        return next[c]->startsWith(prefix.length() == 1 ? "" : prefix.substr(1));
+        Node* curr = root;
+        for (char c : prefix) {
+            if (curr->next[c-'a'] == NULL) return false;
+            curr = curr->next[c-'a'];
+        }
+        return true;
     }
     
-    int ctoi(char c) {
-        return c - 'a';
-    }
 };
 
 /**
