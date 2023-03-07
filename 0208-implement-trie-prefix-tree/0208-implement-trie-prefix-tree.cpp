@@ -15,9 +15,9 @@ public:
     
     void insert(string word) {
         Node* curr = root;
-        for (int i=0; i<word.length(); i++) {
-            if (curr->next[word[i]-'a'] == NULL) curr->next[word[i]-'a'] = new Node();
-            curr = curr->next[word[i]-'a'];
+        for (char c : word) {
+            if (curr->next[c-'a'] == NULL) curr->next[c-'a'] = new Node();
+            curr = curr->next[c-'a'];
         }
         curr->ExistsEnd = true;
     }
