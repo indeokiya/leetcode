@@ -8,13 +8,12 @@ public:
         sort(intervals.begin(), intervals.end());
         
         
-        for (auto it = intervals.begin(); it != intervals.end(); it++) {
-            int l = (*it)[0], r = (*it)[1];
+        for (auto interval : intervals) { 
             
-            while (!pq.empty() && pq.top() <= l) {
+            while (!pq.empty() && pq.top() <= interval[0]) {
                 pq.pop();
             }
-            pq.push(r);
+            pq.push(interval[1]);
             ans = max(ans, (int)pq.size());
         }
         
