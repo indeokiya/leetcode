@@ -8,7 +8,7 @@ public:
         sort(intervals.begin(), intervals.end());
         
         
-        for (auto interval : intervals) { 
+        for (const auto& interval : intervals) { 
             
             while (!pq.empty() && pq.top() <= interval[0]) {
                 pq.pop();
