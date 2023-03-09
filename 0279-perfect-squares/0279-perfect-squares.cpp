@@ -17,29 +17,18 @@ public:
     
     int numSquares(int n) {
         memset(memo, -1, sizeof(memo));
+        
         memo[0] = 0;
+        memo[1] = 1;
         
-        return getMemo(n);        
+        for (int i=2; i<=n; i++) {
+            int curr = 10000;
+            for (int j=1; i-j*j>=0; j++) {
+                curr = min(curr, memo[i-j*j]);
+            }
+            memo[i] = ++curr;
+        }        
     
-//         find(n, idx-1, 0);    
-        
-//         int ans = 10000;
-//         for (int i=0; i<=100; i++) {
-//             ans = min(visited[0][i], ans);
-//         }
-//         return ans;
+        return memo[n];
     }
-    
-//     void find(int remain, int idx, int cnt) {
-//         if (visited[remain][idx] > -1 && visited[remain][idx] <= cnt) return;
-//         visited[remain][idx] = cnt;
-//         if (remain == 0) return;
-        
-//         while (true) {
-//             if (idx>=2) find(remain, idx-1, cnt);
-//             remain -= idx*idx;
-//             if (remain < 0) return;
-//             find(remain, idx, cnt+1);
-//         }
-//     }
 };
