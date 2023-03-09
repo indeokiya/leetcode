@@ -10,9 +10,9 @@ public:
     
         curr = INT_MAX;
         for (int i=1; i*i<=n; ++i) {
-            curr = min(curr, getMemo(n - i*i) + 1);
+            curr = min(curr, getMemo(n - i*i));
         }
-        return curr;
+        return ++curr;
     }
     
     int numSquares(int n) {
