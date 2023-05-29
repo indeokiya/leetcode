@@ -7,10 +7,10 @@ var dp map[int]int
 func getKth(lo int, hi int, k int) int {
     
     dp = map[int]int{}
-    pairs := []pair{}
+    pairs := []*pair{}
     
     for i := lo; i <= hi; i++ {
-        pairs = append(pairs, pair{idx: i, val: rec(i)})
+        pairs = append(pairs, &pair{idx: i, val: rec(i)})
     }
     
     sort.Slice(pairs, func(i, j int) bool {
