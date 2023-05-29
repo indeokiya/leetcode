@@ -3,12 +3,11 @@ type pair struct {
 }
 
 var dp map[int]int
-var pairs []pair
 
 func getKth(lo int, hi int, k int) int {
     
-    dp = make(map[int]int)
-    pairs = make([]pair, 0)
+    dp = map[int]int{}
+    pairs := []pair{}
     
     for i := lo; i <= hi; i++ {
         pairs = append(pairs, pair{idx: i, val: rec(i)})
