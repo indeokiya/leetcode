@@ -10,7 +10,10 @@ func getKth(lo int, hi int, k int) int {
     pairs := []*pair{}
     
     for i := lo; i <= hi; i++ {
-        pairs = append(pairs, &pair{idx: i, val: rec(i)})
+        pairs = append(pairs, &pair{
+            idx: i, 
+            val: rec(i),
+        })
     }
     
     sort.Slice(pairs, func(i, j int) bool {
@@ -19,10 +22,6 @@ func getKth(lo int, hi int, k int) int {
         } 
         return pairs[i].idx < pairs[j].idx
     })
-    
-    for _, pair := range pairs {
-        println(pair.idx, pair.val)
-    }
     
     return pairs[k-1].idx
 }
