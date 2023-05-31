@@ -12,9 +12,9 @@ func minEatingSpeed(piles []int, h int) int {
 				hour++
 			}
 
-			if hour > h {
-				break
-			}
+			// if hour > h {
+			// 	break
+			// }
 		}
         
 		if hour > h {
