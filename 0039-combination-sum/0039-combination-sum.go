@@ -1,10 +1,10 @@
 func combinationSum(candidates []int, target int) [][]int {
-	answers := new([][]int)
-	currSlice := new([]int)
+	answers := [][]int{}
+	currSlice := []int{}
 
-	backTracking(0, &candidates, 0, target, answers, currSlice)
+	backTracking(0, &candidates, 0, target, &answers, &currSlice)
 
-	return *answers
+	return answers
 }
 
 func backTracking(index int, candidates *[]int, sum int, target int, answers *[][]int, currSlice *[]int) {
@@ -22,7 +22,6 @@ func backTracking(index int, candidates *[]int, sum int, target int, answers *[]
 		copy(newSlice, *currSlice)
 		*answers = append(*answers, newSlice)
 	}
-
 
 	backTracking(index, candidates, sum, target, answers, currSlice)
 	*currSlice = (*currSlice)[:len(*currSlice)-1]
