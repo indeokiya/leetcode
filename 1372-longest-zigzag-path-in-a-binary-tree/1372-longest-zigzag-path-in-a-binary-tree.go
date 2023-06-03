@@ -7,8 +7,6 @@
  * }
  */
 
-var length int
-
 func max(lhs, rhs int) int {
     if lhs < rhs {
         return rhs
@@ -17,23 +15,23 @@ func max(lhs, rhs int) int {
 }
 
 func longestZigZag(root *TreeNode) int {
-    length = 0
-    rec(root.Left, true, 1)
-    rec(root.Right, false, 1)
-    return length
+    length := new(int)
+    rec(root.Left, true, 1, length)
+    rec(root.Right, false, 1, length)
+    return *length
 }
 
-func rec(root *TreeNode, fromLeft bool, depth int) {
+func rec(root *TreeNode, fromLeft bool, depth int, length *int) {
     if root == nil {
-        length = max(length, depth-1)
+        *length = max(*length, depth-1)
         return
     }
     
     if fromLeft == true {
-        rec(root.Right, false, 1 + depth)
-        rec(root.Left, true, 1)
+        rec(root.Right, false, 1 + depth, length)
+        rec(root.Left, true, 1, length)
     } else {
-        rec(root.Left, true, 1 + depth)
-        rec(root.Right, false, 1)
+        rec(root.Left, true, 1 + depth, length)
+        rec(root.Right, false, 1, length)
     }
 }
