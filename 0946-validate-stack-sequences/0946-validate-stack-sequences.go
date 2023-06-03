@@ -1,25 +1,13 @@
 func validateStackSequences(pushed []int, popped []int) bool {
-    stack := []int{}
-    i, j, size := 0, 0, 0
+    stack := make([]int, 0, len(pushed))
     
-    for i < len(pushed) {
+    for i, j := 0, 0; i < len(pushed); i++ {
         stack = append(stack, pushed[i])
-        i++
-        size++
-        for size > 0 && stack[size-1] == popped[j] {
-            stack = stack[:size-1]
-            size--
+        for len(stack) > 0 && stack[len(stack)-1] == popped[j] {
+            stack = stack[:len(stack)-1]
             j++
         }
     }
     
-    for size > 0 {
-        if stack[size-1] != popped[j] {
-            return false
-        }
-        size--
-        j++
-    }
-    
-    return true
+    return len(stack) == 0
 }
