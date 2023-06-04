@@ -5,7 +5,7 @@ type Pair struct {
 
 func topKFrequent(words []string, k int) []string {
 	m := map[string]int{}
-	out := []string{}
+    out := make([]string, 0, k)
 
 	for _, word := range words {
 		m[word]++
@@ -14,10 +14,7 @@ func topKFrequent(words []string, k int) []string {
 	slice := make([]Pair, 0)
 
 	for k, v := range m {
-		newPair := Pair{}
-		newPair.word = k
-		newPair.freq = v
-		slice = append(slice, newPair)
+        slice = append(slice, Pair{word:k, freq:v})
 	}
 
 	sort.Slice(slice, func(i, j int) bool {
