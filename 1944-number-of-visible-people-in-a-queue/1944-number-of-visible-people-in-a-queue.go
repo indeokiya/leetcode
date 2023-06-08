@@ -2,10 +2,8 @@ func canSeePersonsCount(heights []int) []int {
     N := len(heights)
     queue := make([]int, 0, 0)
     answer := make([]int, N, N)
-    queue = append(queue, heights[N-1])
-    answer[N-1] = 0
     
-    for i:=N-2; i>=0; i-- {
+    for i:=N-1; i>=0; i-- {
         
         for len(queue) > 0 {
             answer[i]++
