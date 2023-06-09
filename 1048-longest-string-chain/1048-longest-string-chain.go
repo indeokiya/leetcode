@@ -25,27 +25,15 @@ func longestStrChain(words []string) int {
 	return ans
 }
 
-func IsPredecessor(a, b string) (result bool) {
-	if len(a)+1 != len(b) {
-		return
-	}
-
-	i, j, count := 0, 0, 0
-	for i<len(a) && j<len(b) && count < 2 {
-		if a[i] == b[j] {
-			i++
-			j++
-		} else {
-			j++
-            count++
+func IsPredecessor(a, b string) bool {
+    i := 0
+	for ; i<len(a); i++ {
+		if a[i] != b[i] {
+			break
 		}
 	}
 
-	if i == len(a) {
-		result = true
-	}
-
-	return
+    return a[i:] == b[i+1:]
 }
 
 func max(a, b int) int {
