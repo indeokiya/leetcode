@@ -9,7 +9,7 @@ func probabilityOfHeads(prob []float64, target int) float64 {
     memo[0][0] = 1-prob[0]
     memo[0][1] = prob[0]
     for i:=1; i<N; i++ {
-        for j:=0; j<=i; j++ {
+        for j:=0; j<=min(target,i); j++ {
             memo[i][j] += memo[i-1][j] * (1-prob[i])
             memo[i][j+1] += memo[i-1][j] * prob[i]
             
@@ -17,4 +17,11 @@ func probabilityOfHeads(prob []float64, target int) float64 {
     }
     
     return memo[N-1][target]
+}
+
+func min(a, b int) int {
+    if a < b {
+        return a
+    }
+    return b
 }
