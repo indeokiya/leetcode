@@ -7,9 +7,7 @@ func coinChange(coins []int, amount int) int {
     
     for _, coin := range coins {
         for i:=amount; i>=coin; i-- {
-            if money[i] != MAX {
-                money[i-coin] = min(money[i-coin], money[i]+1)
-            }
+            money[i-coin] = min(money[i-coin], money[i]+1)
         }
     }
     
