@@ -3,7 +3,7 @@ func singleNumber(nums []int) int {
     
     for _, num := range nums {
         seenOnce = seenOnce^num & ^seenTwice
-        seenTwice = seenTwice^num & seenOnce
+        seenTwice = seenTwice^num & ^seenOnce
     }
     
     return seenOnce
