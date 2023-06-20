@@ -1,10 +1,10 @@
 func singleNumber(nums []int) int {
-    seenOnce, seenTwice := 0, 0
+    one, two := 0x0, 0x0
     
     for _, num := range nums {
-        seenOnce = seenOnce^num & ^seenTwice
-        seenTwice = seenTwice^num & ^seenOnce
+        one = one^num & ^two
+        two = two^num & one
     }
     
-    return seenOnce
+    return one
 }
