@@ -10,9 +10,5 @@ func longestCommonPrefix(strs []string) string {
         ans++
     }
 
-    
-    if ans == 0 {
-        return ""
-    }
     return strs[0][:ans]
 }
