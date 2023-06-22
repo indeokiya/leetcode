@@ -12,9 +12,10 @@ func sortedArrayToBST(nums []int) *TreeNode {
     }
     
     mid := len(nums) >> 1
-    node := TreeNode{Val: nums[mid]}
-    node.Left = sortedArrayToBST(nums[:mid])
-    node.Right = sortedArrayToBST(nums[mid+1:])
     
-    return &node
+    return &TreeNode{
+        nums[mid],
+        sortedArrayToBST(nums[:mid]),
+        sortedArrayToBST(nums[mid+1:]),        
+    }
 }
