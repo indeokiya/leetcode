@@ -4,28 +4,30 @@ func minDistance(word1 string, word2 string) int {
     memo := make([][]int, M+1, M+1)
     slices := make([]int, (M+1)*(N+1), (M+1)*(N+1))
     for i:=0; i<=M; i++ {    
+        for j:=0; j<=N; j++ {
+            slices[j] = -1
+        }
         memo[i], slices = slices[:N+1], slices[N+1:]
     }
     
-    for j:=1; j<=N; j++ {
-        memo[0][j] = j;
-    }
-    for i:=1; i<=M; i++ {
-        memo[i][0] = i;
-    }
+    return rec(M, N, word1, word2, &memo)
+}
 
-    for i:=1; i<=M; i++ {
-        for j:=1; j<=N; j++ {
-            if word1[i-1] == word2[j-1] {
-                memo[i][j] = memo[i-1][j-1]
-                continue
-            }
-            memo[i][j] = min(memo[i-1][j-1], memo[i-1][j], memo[i][j-1]) + 1
-        }
+func rec(n, m int, s1, s2 string, memo *[][]int) int {
+    if n==0 || m==0 {
+        return max(n, m)
+    }
+    if (*memo)[n][m] > -1 {
+        return (*memo)[n][m]
     }
     
+    if (s1[n-1] != s2[m-1]) {
+        (*memo)[n][m] = min(rec(n-1, m, s1, s2, memo), rec(n, m-1, s1, s2, memo), rec(n-1, m-1, s1, s2, memo)) + 1
+    } else {
+        (*memo)[n][m] = rec(n-1, m-1, s1, s2, memo)
+    }
     
-    return memo[M][N]
+    return (*memo)[n][m]
 }
 
 func min(a ...int) (MIN int) {
@@ -36,6 +38,13 @@ func min(a ...int) (MIN int) {
 		}
 	}
 	return
+}
+
+func max(a, b int) int {
+    if a < b {
+        return b
+    }
+    return a
 }
 
 /*
