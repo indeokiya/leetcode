@@ -4,7 +4,7 @@ func minDistance(word1 string, word2 string) int {
     memo := make([][]int, M+1, M+1)
     slices := make([]int, (M+1)*(N+1), (M+1)*(N+1))
     for i:=0; i<=M; i++ {    
-        memo[i] = slices[i*(N+1):(i+1)*(N+1)]
+        memo[i], slices = slices[:N+1], slices[N+1:]
     }
     
     for j:=1; j<=N; j++ {
