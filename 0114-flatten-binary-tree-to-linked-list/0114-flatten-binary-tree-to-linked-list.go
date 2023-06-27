@@ -11,20 +11,20 @@ func flatten(root *TreeNode)  {
         return
     }
     
-    flatten(root.Left)
-    flatten(root.Right)
-    
-    if root.Left == nil {
-        return
-    }
-    
-    node := root.Left
-    for node.Right != nil {
+    node := root
+    for node != nil {
+        if node.Left != nil {
+            rightmost := node.Left
+            for rightmost.Right != nil {
+                rightmost = rightmost.Right
+            }
+            rightmost.Right = node.Right
+            node.Right = node.Left
+            node.Left = nil            
+        }
+
         node = node.Right
     }
-    node.Right = root.Right
-    root.Right = root.Left
-    root.Left = nil
 }
 
 
