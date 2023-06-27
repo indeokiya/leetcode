@@ -9,7 +9,7 @@ func wordPattern(pattern string, s string) bool {
     exist := map[string]E{}
     
     for i:=0; i<len(pattern); i++ {
-        b := pattern[i] - 'a'
+        var b byte = pattern[i] - 'a'
         str, ok := mapping[b]
         if !ok {
             _, e := exist[splited[i]]
