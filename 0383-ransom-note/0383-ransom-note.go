@@ -4,29 +4,18 @@ func canConstruct(ransomNote string, magazine string) bool {
         return false
     }
     
-    m := map[byte]int{}
+    m := make([]int, 26, 26)
     
     for i:=0; i<N; i++ {
-        char := magazine[i]
-        _, ok := m[char]
-        if ok {
-            m[char]++
-        } else {
-            m[char] = 1
-        }
+        m[magazine[i]-'a']++
     }
     
     for i:=0; i<M; i++ {
-        char := ransomNote[i]
-        num, ok := m[char]
-        if !ok {
+        m[ransomNote[i]-'a']--
+        if m[ransomNote[i]-'a'] < 0 {
             return false
         }
-        if num <= 0 {
-            return false
-        }
-        m[char]--
-    }   
+    }
     
     return true
 }
