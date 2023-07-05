@@ -18,22 +18,21 @@ class Solution {
     
     public List<String> binaryTreePaths(TreeNode root) {
         answer = new ArrayList<>();
-        String str = String.valueOf(root.val);
-        track(str, root);
+        track(new StringBuilder(), root);
         return answer;
     }
     
-    private void track(String str, TreeNode node) {
-        if (node.left == null && node.right == null) {
-            answer.add(str);
+    private void track(StringBuilder sb, TreeNode node) {
+        if (node == null) {
             return;
         }
-        
-        if (node.left != null) {
-            track(str + "->" + String.valueOf(node.left.val), node.left);
+        sb.append(node.val);
+        if (node.left == null && node.right == null) {
+            answer.add(sb.toString());
+            return;
         }
-        if (node.right != null) {
-            track(str + "->" + String.valueOf(node.right.val), node.right);
-        }
+        sb.append("->");
+        track(new StringBuilder(sb), node.left);
+        track(new StringBuilder(sb), node.right);
     }
 }
