@@ -9,5 +9,4 @@ LEFT JOIN
 ON 
     e.empId = b.empId
 WHERE
-    bonus IS NULL OR
-    bonus < 1000
+    COALESCE(bonus, 0) < 1000
