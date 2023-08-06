@@ -21,7 +21,5 @@ FROM
     CTE
 GROUP BY
     requester_id
-ORDER BY
-    num DESC
-LIMIT
-    1
+HAVING
+    COUNT(1) = (SELECT COUNT(1) FROM CTE GROUP BY requester_id ORDER BY COUNT(1) DESC LIMIT 1)
