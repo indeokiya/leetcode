@@ -1,10 +1,9 @@
 # Write your MySQL query statement below
 
-WITH SalaryRank AS (
-  SELECT e.id, e.name, e.salary, d.name AS department, DENSE_RANK() OVER(PARTITION BY d.id ORDER BY e.salary DESC) AS rn
-  FROM Employee e INNER JOIN Department d ON e.departmentId = d.id
+SELECT d.name AS Department, e1.name AS Employee, salary
+FROM Employee e1 INNER JOIN Department d ON e1.departmentId = d.id
+WHERE 3 > (
+  SELECT COUNT(DISTINCT e2.salary)
+  FROM Employee e2
+  WHERE e1.departmentId = e2.departmentId AND e1.salary < e2.salary
 )
-
-SELECT department, name AS Employee, salary
-FROM SalaryRank
-WHERE rn <= 3
