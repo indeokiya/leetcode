@@ -2,20 +2,18 @@
 
 WITH Host AS (
     SELECT t.team_id, t.team_name, SUM(CASE
-        WHEN ISNULL(m.host_goals) THEN 0
         WHEN m.host_goals > guest_goals THEN 3 
-        WHEN m.host_goals < guest_goals THEN 0
-        ELSE 1
+        WHEN m.host_goals = guest_goals THEN 1
+        ELSE 0
         END
     ) AS num_points
     FROM Teams t LEFT JOIN Matches m ON t.team_id = m.host_team
     GROUP BY team_id
 ), Guest AS (
     SELECT t.team_id, t.team_name, SUM(CASE
-        WHEN ISNULL(m.host_goals) THEN 0
-        WHEN m.host_goals > guest_goals THEN 0 
         WHEN m.host_goals < guest_goals THEN 3
-        ELSE 1
+        WHEN m.host_goals = guest_goals THEN 1
+        ELSE 0
         END
     ) AS num_points
     FROM Teams t LEFT JOIN Matches m ON t.team_id = m.guest_team
