@@ -1,14 +1,17 @@
 class Solution {
     public int hIndex(int[] citations) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int[] counts = new int[1001];
         for (int num : citations) {
-            pq.add(num);
+            counts[num]++;
         }
-        for (int i=1; i<=citations.length; i++) {
-            if (pq.poll() < i) {
-                return i-1;
+        int sum = 0;
+    
+        for (int i=1000; i>=1; i--) {
+            sum += counts[i];
+            if (sum >= i) {
+                return i;
             }
         }
-        return citations.length;
+        return 0;
     }
 }
