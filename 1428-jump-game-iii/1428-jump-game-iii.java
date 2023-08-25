@@ -14,13 +14,13 @@ class Solution {
 
             int l = curr - arr[curr];
             int r = curr + arr[curr];
-            if (l >= 0 && l < N && !visited[l]) {
+            if (l >= 0 && !visited[l]) {
                 visited[l] = true;
-                q.add(l);
+                q.offer(l);
             }
-            if (r >= 0 && r < N && !visited[r]) {
+            if (r < N && !visited[r]) {
                 visited[r] = true;
-                q.add(r);
+                q.offer(r);
             }
         }
 
