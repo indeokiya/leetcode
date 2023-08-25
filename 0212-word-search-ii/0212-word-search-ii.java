@@ -46,12 +46,17 @@ class Solution {
             node.word = null;
         }
 
+        if (node.children.isEmpty()) {
+            parent.children.remove(board[r][c]);
+            return;
+        }
+
         char tmp = board[r][c];
         board[r][c] = '-';
         for (int d=0; d<4; d++) {
             int nR = r + dr[d];
             int nC = c + dc[d];
-            if (nR < 0  || nR >= M || nC < 0 || nC >= N || board[nR][nC] == '-' || !node.children.containsKey(board[nR][nC])) {
+            if (nR < 0  || nR >= M || nC < 0 || nC >= N || !node.children.containsKey(board[nR][nC])) {
                 continue;
             }
             backTracking(nR, nC, node, board);
