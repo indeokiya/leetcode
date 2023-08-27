@@ -8,10 +8,11 @@ class Solution {
         this.SUM = arrSum / k;
         this.subset = new int[k];
 
-        nums = Arrays.stream(nums).boxed()
-                    .sorted(Collections.reverseOrder())
-                    .mapToInt(Integer::intValue)
-                    .toArray();
+        Arrays.sort(nums);
+        // nums = Arrays.stream(nums).boxed()
+        //             .sorted(Collections.reverseOrder())
+        //             .mapToInt(Integer::intValue)
+        //             .toArray();
 
         return backtracking(nums, nums.length, k, 0);
     }
