@@ -1,7 +1,6 @@
 class Solution {
     public String multiply(String num1, String num2) {
-        if (num1.length()==1 && num1.charAt(0)=='0') return "0";
-        if (num2.length()==1 && num2.charAt(0)=='0') return "0";
+        if (num1.equals("0") || num2.equals("0")) return "0";
 
         int M = num1.length(), N = num2.length();
         int[] nums = new int[M+N];
