@@ -7,8 +7,8 @@ class Solution {
             map.computeIfAbsent(id, k -> new LinkedList<>()).add(score);
         }
 
-        int size = map.size();
-        int[][] answer = new int[size][];
+
+        List<int[]> answer = new ArrayList<>();
         for (int id : map.keySet()) {
             List<Integer> scores = map.get(id);
             double sum = scores.stream()
@@ -16,9 +16,11 @@ class Solution {
                 .limit(5)
                 .mapToDouble(i -> i)
                 .sum();
-            answer[--size] = new int[]{id, (int)(sum/5)};
+            answer.add(new int[]{id, (int)(sum/5)});
         }
-        Arrays.sort(answer, (o1, o2) -> o1[0] - o2[0]);
-        return answer;
+        Collections.sort(answer, (o1, o2) -> o1[0] - o2[0]);
+
+        int[][] solArr = new int[map.size()][];
+        return answer.toArray(solArr);
     }
 }
