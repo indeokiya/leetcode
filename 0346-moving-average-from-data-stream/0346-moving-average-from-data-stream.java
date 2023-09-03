@@ -17,7 +17,12 @@ class MovingAverage {
     }
 
     private double avg() {
-        return Arrays.stream(nums).average().getAsDouble();
+        double sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        // return Arrays.stream(nums).average().getAsDouble();
+        return sum / size;
     }
 }
 
