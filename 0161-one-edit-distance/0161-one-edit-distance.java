@@ -1,16 +1,19 @@
 class Solution {
     public boolean isOneEditDistance(String s, String t) {
-        if (s.equals(t)) return false;
-
-        int maxLen = Math.max(s.length(), t.length());
-        int minLen = Math.min(s.length(), t.length());
+        int n1 = s.length();
+        int n2 = t.length();
+        if (t.equals(s)) return false;
+        if (n1 > n2) return isOneEditDistance(t, s);
+        if (n1 + 1 < n2) return false;
 
         int p1 = 0;
-        for (; p1 < minLen && s.charAt(p1) == t.charAt(p1); p1++) {}
-        int p2 = 0;
-        for (; p2 < minLen && s.charAt(s.length()-1-p2) == t.charAt(t.length()-1-p2); p2++) {}
-        
-        return p1 >= maxLen-1-p2;
+        while (p1 < Math.min(n1, n2)) {
+            if (s.charAt(p1) != t.charAt(p1)) break;
+            p1++;
+        }
+
+        if (n1 == n2) return s.substring(p1+1).equals(t.substring(p1+1));
+        return s.substring(p1).equals(t.substring(p1+1));
     }
 }
 
