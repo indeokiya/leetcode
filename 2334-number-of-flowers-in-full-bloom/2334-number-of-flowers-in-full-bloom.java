@@ -3,7 +3,7 @@ class Solution {
         int[] sortedPeople = Arrays.copyOf(people, people.length);
         Arrays.sort(sortedPeople);
 
-        Arrays.sort(flowers, (a, b) -> Arrays.compare(a, b));
+        Arrays.sort(flowers, (a, b) -> a[0]==b[0] ? a[1]-b[1] : a[0]-b[0]);
         PriorityQueue<Integer> heap = new PriorityQueue<>();
         Map<Integer, Integer> dic = new HashMap<>();
 
