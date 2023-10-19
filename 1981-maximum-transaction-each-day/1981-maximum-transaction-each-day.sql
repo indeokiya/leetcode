@@ -1,15 +1,17 @@
 # Write your MySQL query statement below
 
+WITH CTE AS (
+    SELECT
+        transaction_id, RANK() OVER (PARTITION BY DAY(day) ORDER BY amount DESC) rn
+    FROM
+        Transactions
+)
+
 SELECT
     transaction_id
 FROM
-    Transactions
+    CTE
 WHERE
-    (DAY(day), amount) IN (
-        SELECT
-            DAY(day), MAX(amount) OVER (PARTITION BY DAY(day))
-        FROM
-            Transactions
-    )
+    rn = 1
 ORDER BY
     transaction_id
