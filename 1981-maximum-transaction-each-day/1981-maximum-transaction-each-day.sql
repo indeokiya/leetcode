@@ -7,11 +7,9 @@ FROM
 WHERE
     (DAY(day), amount) IN (
         SELECT
-            DAY(day), MAX(amount)
+            DAY(day), MAX(amount) OVER (PARTITION BY DAY(day))
         FROM
             Transactions
-        GROUP BY
-            DAY(day)
     )
 ORDER BY
     transaction_id
