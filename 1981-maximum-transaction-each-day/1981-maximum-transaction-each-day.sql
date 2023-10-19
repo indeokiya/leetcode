@@ -2,7 +2,7 @@
 
 WITH CTE AS (
     SELECT
-        transaction_id, RANK() OVER (PARTITION BY DAY(day) ORDER BY amount DESC) rn
+        transaction_id, RANK() OVER (PARTITION BY DATE(day) ORDER BY amount DESC) rn
     FROM
         Transactions
 )
