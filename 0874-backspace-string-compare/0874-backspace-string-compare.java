@@ -18,8 +18,9 @@ class Solution {
                 else break;
             }            
 
-            if (p1>=0 && p2>=0 && s.charAt(p1) != t.charAt(p2)) return false;
             if (p1>=0 != p2>=0) return false;
+            if (p1>=0 && p2>=0 && s.charAt(p1) != t.charAt(p2)) return false;
+            
             p1--; p2--;
         }
 
